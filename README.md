@@ -91,3 +91,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## Implementation Details
+1. Routing
+    For routing I installed 'react-router-dom' via ```npm install react-router-dom```. Then I conditionally displayed the bookshelf view and search view using the Route Component. I made the plus button and back button link to the search page and bookshelf respectively by using the Link Component.

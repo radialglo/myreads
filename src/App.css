@@ -167,6 +167,16 @@ body, .app {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
 }
+
+/**
+ * The data from the backend did not return image size information.
+ * Instead of trying to figure out the image size so we can set the background width/height,
+ * let's just use the image tag and align that image within it's container.
+ */
+.book-cover img {
+    vertical-align: middle;
+}
+
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;

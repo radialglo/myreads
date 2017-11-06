@@ -97,3 +97,11 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Implementation Details
 1. Routing
     For routing I installed 'react-router-dom' via ```npm install react-router-dom```. Then I conditionally displayed the bookshelf view and search view using the Route Component. I made the plus button and back button link to the search page and bookshelf respectively by using the Link Component.
+2. Library on Page Load
+    We use getAll() to get all the user's books. We store the state of all the books as a map of book id to book state, so that we can reuse this map to quickly look up book state. This is really usefully for example for looking up the selection state
+    of search results, since this data is not provided from the search results payload. We keep our data normalized by representing the Currently Reading, Want To Read, and Read shelves as arrays of book ids and look up data in the book map when we need it.
+3. Search
+   The search input is a controlled component, so whenever a user types, the query state is updated and reflected in the input field. The API doesn't gracefully handle empty strings, so we ignore querying the API for empty search queries.
+4. Book Shelving
+   When a book is shelved we update our book map state with this updated data and send this update to the server. The update response gives us a set of arrays of book ids representing the 3 shelves which we use to update our state.
+   We also update the shelf status of our search results.

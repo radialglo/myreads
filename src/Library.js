@@ -3,7 +3,7 @@ import {  Link } from 'react-router-dom'
 import { ROUTES } from './constants'
 import BookShelf from './BookShelf'
 
-const Library =({wantToReadBooks}) =>  (
+const Library =({currentlyReading, wantToRead, read, onSelectBookShelf}) =>  (
     <div className="list-books">
         <div className="list-books-title">
             <h1>MyReads</h1>
@@ -12,15 +12,18 @@ const Library =({wantToReadBooks}) =>  (
             <div>
             <BookShelf 
                 shelfTitle="Currently Reading"
-                books={wantToReadBooks}
+                books={currentlyReading}
+                onSelectBookShelf={onSelectBookShelf}
             />
             <BookShelf 
                 shelfTitle="Want to Read"
-                books={wantToReadBooks}
+                books={wantToRead}
+                onSelectBookShelf={onSelectBookShelf}
             />
             <BookShelf 
                 shelfTitle="Read"
-                books={wantToReadBooks}
+                books={read}
+                onSelectBookShelf={onSelectBookShelf}
             />
             </div>
         </div>

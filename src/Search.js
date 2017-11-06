@@ -1,10 +1,9 @@
 import React from 'react'
 import {  Link } from 'react-router-dom'
 import { ROUTES } from './constants'
-import BookShelf from './BookShelf'
 import BooksGrid from './BooksGrid'
 
-const Search = ({query, searchResults, onSearchChange}) => (
+const Search = ({query, searchResults, onSearchChange, onSelectBookShelf}) => (
     <div className="search-books">
         <div className="search-books-bar">
             <Link to={ROUTES.HOME} className="close-search">Close</Link>
@@ -22,7 +21,10 @@ const Search = ({query, searchResults, onSearchChange}) => (
             </div>
         </div>
         <div className="search-books-results">
-            <BooksGrid books={searchResults}/>
+            <BooksGrid 
+                books={searchResults}
+                onSelectBookShelf={onSelectBookShelf}
+            />
         </div>
     </div>
 )

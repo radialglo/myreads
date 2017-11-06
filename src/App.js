@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
 
 
   onSearchChange = (e) => {
-      const query = e.target.value;
+      const query = e.target.value.trim();
       const bookData = this.state.bookData;
       let searchResults;
 
@@ -65,26 +65,35 @@ class BooksApp extends React.Component {
           query,
       });
 
-      BooksAPI.search(query, 20).then((data) => {
-          if (data.error) {
-              searchResults = data.items;
-          } else {
-            searchResults = data.map((book) => (
-                {
-                    id: book.id,
-                    title: book.title,
-                    authors: book.authors,
-                    bookCover: book.imageLinks.thumbnail,
-                    // Update shelf data here if it exists or set to None
-                    shelf: bookData[book.id] ? bookData[book.id].shelf :  SHELVES.NONE,
-                }
-            ))
-          }
+      // Empty strings produce 403's in the api so gracefully handle those
+      // by not submitting query in the first place
+      if (query) {
+        BooksAPI.search(query, 20).then((data) => {
+            if (data.error) {
+                searchResults = data.items;
+            } else {
+                searchResults = data.map((book) => (
+                    {
+                        id: book.id,
+                        title: book.title,
+                        authors: book.authors,
+                        bookCover: book.imageLinks.thumbnail,
+                        // Update shelf data here if it exists or set to None
+                        shelf: bookData[book.id] ? bookData[book.id].shelf :  SHELVES.NONE,
+                    }
+                ))
+            }
 
-          this.setState({
-            searchResults,
-          });
-      });
+            this.setState({
+                searchResults,
+            });
+
+        });
+      } else {
+        this.setState({
+            searchResults: [],
+        });
+      }
   }
 
   onSelectBookShelf = ({

@@ -3,7 +3,6 @@ import Book from './Book'
 
 const BooksGrid = ({books, onSelectBookShelf}) => (
     <ol className="books-grid">
-        {console.log(books)}
         {books.map((book) => (
             <li key={book.id}>
                 <Book
